@@ -1,11 +1,15 @@
-import React from 'react'
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import './index.css';
+import App from './components/App';
 
-const index = () => {
-  return (
-    <div>
-      
-    </div>
-  )
+const rootElement = document.getElementById('root') as HTMLElement;
+
+if (rootElement) {
+  const root = ReactDOM.createRoot(rootElement);
+  root.render(
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>
+  );
 }
-
-export default index
