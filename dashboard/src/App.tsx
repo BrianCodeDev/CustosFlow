@@ -4,10 +4,15 @@ import Register from './components/Register';
 
 const App: React.FC = () => {
   return (
+    
     <div className="app-container">
+      
       <Register />
       {/* Other content of your application */}
+      
     </div>
+   
+    
   );
 };
 
