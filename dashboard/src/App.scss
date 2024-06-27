@@ -1,4 +1,4 @@
-body {
+.register-body {
     background-image: linear-gradient(
         to bottom right,
         rgba(35, 35, 35, 0),
@@ -9,20 +9,46 @@ body {
     background-size: cover;
     height: 100vh;
     align-content: center;
-    width: 80%;
+   
     margin: 0 auto;
 }
 
-.register h1 {
-    color: rgb(0, 116, 231);
-    font-size: 50px;
-    font-weight: 800;
-}
-.form-content {
-    background-color: white;
-    width: 100%;
-}
-.card {
-    border: none;
+
+.register-content-sidebar {
+    height: 100vh;
+    background-image: url("assets/img/Component\ 2\ \(6\).svg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 30vw;
 }
 
+.sidebar-one {
+    width: 24.9vw;
+    background-color: white;
+    position: absolute;
+    top: 0;
+    height: 10vw;
+}
+.register-content-sidebar p {
+    font-size: 20px;
+    width: 50%;
+    padding-left: 20px;
+    padding-top: 40px;
+    font-weight: 800;
+    color: black;
+}
+.register-content-sidebar .logo {
+    display: flex;
+    margin-top: 70px;
+    padding-left: 60px;
+
+}
+.register-content-sidebar h2 {
+    font-size: 20px;
+    padding-left: 60px;
+}
+.register-content-sidebar h3{
+    font-size: 16px;
+    padding-left: 60px;
+}
