@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import '../App.css'; // Assuming App.css is now located inside src/ directory
 import { MDBBtn, MDBContainer, MDBRow, MDBCol, MDBCard, MDBCardBody, MDBInput, MDBCheckbox, MDBIcon } from 'mdb-react-ui-kit';
 import axios from 'axios';
+import logo from '../assets/img/google-icon.svg';
 import '../App.css';
 
 const App: React.FC = () => {
@@ -46,6 +46,24 @@ const App: React.FC = () => {
        </div>
        <h2>Register to your account</h2>
        <h3>Don't have an account? <u>Sign Up</u></h3>
+      <form action="" className='form-content'>
+        <div className="input-one">
+          <label>Email</label> <br />
+          <input type="text" placeholder='Email here: '/>
+        </div>
+        <div className="input-two">
+        <label>Password</label> <br />
+        <input type="text" placeholder='Password here: '/>
+        </div>
+      </form>
+       <div className="display-social-button">
+       <div className="google-button">
+      <button><img src={logo} alt="google-icon" />Google</button>
+      </div>
+      <div className="github-button">
+      <button><img src="" alt="github-icon" />Github</button>
+      </div>
+       </div>
       </div>
       </div>
     </div>
