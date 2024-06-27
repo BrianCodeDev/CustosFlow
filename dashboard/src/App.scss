@@ -1,0 +1,28 @@
+body {
+    background-image: linear-gradient(
+        to bottom right,
+        rgba(35, 35, 35, 0),
+        rgba(56, 56, 56, 0)),
+        url("assets/img/371c060cbef7357ff4e2f54a0408b064.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+    align-content: center;
+    width: 80%;
+    margin: 0 auto;
+}
+
+.register h1 {
+    color: rgb(0, 116, 231);
+    font-size: 50px;
+    font-weight: 800;
+}
+.form-content {
+    background-color: white;
+    width: 100%;
+}
+.card {
+    border: none;
+}
+

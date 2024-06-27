@@ -1,8 +1,9 @@
-import React from 'react';
+import React from 'react'
 
-const App: React.FC = () => {
+const Navbar = () => {
   return (
-    <nav className="relative px-4 py-4 flex justify-between items-center bg-white">
+    <div>
+          <nav className="relative px-4 py-4 flex justify-between items-center bg-white">
       <a className="text-3xl font-bold leading-none" href="#" style={{display: "flex"}}>
         <svg className="h-10" viewBox="0 0 10240 10240">
           <path
@@ -112,7 +113,8 @@ const App: React.FC = () => {
         Sign up
       </a>
     </nav>
-  );
-};
+    </div>
+  )
+}
 
-export default App;
+export default Navbar
