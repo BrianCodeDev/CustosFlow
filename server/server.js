@@ -1,57 +1,55 @@
-// backend/server.js
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const cors = require('cors');
+require('dotenv').config();
 
 const app = express();
-const port = process.env.PORT || 5000;
+const port = 5000;
 
-// Middleware
 app.use(bodyParser.json());
+app.use(cors());
 
-// MongoDB connection
-const mongoURI = 'mongodb+srv://coffee:Blue1088!@coffee.uvzn1x4.mongodb.net/test?retryWrites=true&w=majority&appName=coffee';
-mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true });
-const db = mongoose.connection;
-db.once('open', () => {
-  console.log('Connected to MongoDB');
-  console.log('Server running on port ' + port);
-});
-db.on('error', err => console.error('MongoDB connection error:', err));
-
-// Define MongoDB schema and model
-const UserSchema = new mongoose.Schema({
-  firstName: String,
-  lastName: String,
-  email: String,
-  password: String,
-  subscribe: Boolean
+mongoose.connect(process.env.MONGO_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
 });
 
-const User = mongoose.model('User', UserSchema);
-
-// Routes
-app.post('/api/register', async (req, res) => {
-  const { firstName, lastName, email, password, subscribe } = req.body;
-
-  try {
-    const newUser = new User({
-      firstName,
-      lastName,
-      email,
-      password,
-      subscribe
-    });
-
-    await newUser.save();
-    res.status(201).json({ message: 'User registered successfully' });
-  } catch (error) {
-    console.error('Error registering user:', error);
-    res.status(500).json({ error: 'Failed to register user' });
-  }
+const todoSchema = new mongoose.Schema({
+  text: String,
+  completed: Boolean,
 });
 
-// Start server
+const Todo = mongoose.model('Todo', todoSchema);
+
+app.get('/todos', async (req, res) => {
+  const todos = await Todo.find();
+  res.json(todos);
+});
+
+app.post('/todos', async (req, res) => {
+  const newTodo = new Todo({
+    text: req.body.text,
+    completed: false,
+  });
+  const savedTodo = await newTodo.save();
+  res.json(savedTodo);
+});
+
+app.put('/todos/:id', async (req, res) => {
+  const updatedTodo = await Todo.findByIdAndUpdate(
+    req.params.id,
+    { completed: req.body.completed },
+    { new: true }
+  );
+  res.json(updatedTodo);
+});
+
+app.delete('/todos/:id', async (req, res) => {
+  const deletedTodo = await Todo.findByIdAndDelete(req.params.id);
+  res.json(deletedTodo);
+});
+
 app.listen(port, () => {
-  console.log('Server running on port ' + port);
+  console.log(`Server running on port ${port}`);
 });

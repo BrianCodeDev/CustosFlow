@@ -1,3 +1,5 @@
+
+
 .register-body {
     background-image: linear-gradient(
         to bottom right,
@@ -85,4 +87,241 @@
 .read-more a {
     color: black;
     font-weight: 800;
+}
+/* Example CSS for DashboardLayout */
+
+.dashboard-layout {
+    display: flex;
+    height: 100vh;
+  }
+  
+  .sidebar {
+    width: 250px;
+    background-color: #1D1D1D;
+    color: white;
+  }
+  
+  .sidebar h2 {
+    margin-bottom: 20px;
+  }
+  
+  .sidebar ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .sidebar li {
+    margin-bottom: 10px;
+    padding-left: 20px;
+  }
+  
+  .sidebar a {
+    color: white;
+    text-decoration: none;
+  }
+  
+  .sidebar a:hover {
+    text-decoration: underline;
+  }
+  
+  .main-content {
+    flex: 1;
+  }
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    background-color: #1D1D1D;
+    color: white;
+  }
+  
+  .navbar-logo img {
+    width: 40px;
+    height: auto;
+    margin-right: 10px;
+  }
+  
+  .navbar-links {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    
+  }
+  
+  .navbar-links li {
+    margin-right: 20px;
+    padding-top: 15px;
+
+  }
+  
+  .navbar-links a {
+    color: white;
+    text-decoration: none;
+  }
+  .navbar-links input {
+    width: 800px;
+    padding-left: 20px;
+    border-radius: 100px;
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    margin-left: 10px;
+
+  }
+  .navbar-links input:focus, textarea:focus, select:focus {
+    width: 800px;
+    padding-left: 20px;
+    border-radius: 100px;
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    margin-left: 10px;
+    outline: none;
+
+  }
+  .input-search {
+    background-color: white;
+    margin-top: 12px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 20px;
+    border-radius: 100px;
+  }
+  .input-search .faMagnifyingGlass {
+    color: #7D7D7D;
+    font-size: 20px;
+    padding: 0;
+
+  }
+  .navbar-links a:hover {
+    text-decoration: underline;
+  }  
+  .navbar-links button {
+    margin-top: 10px;
+    background-color: #157BFF;
+    border: none;
+    width: 120px;
+    margin-right: 20px;
+    border-radius: 6px;
+    color: white;
+    font-weight: 600;
+    font-size: 16px;
+  }
+  .navbar-links h6 {
+    margin-top: 16px;
+    padding-right: 10px;
+  }
+  .logo-center {
+  
+    text-align: center;
+  }
+  .logo-center img {
+    width: 200px;
+    padding-top: 10px;
+  }
+  .overview {
+   background-color: #161616;
+   line-height: 60px;
+}
+.overview .faShare {
+  color: white;
+  font-size: 30px;
+  float: right;
+  padding-top: 20px;
+  padding-right: 5px;
+}
+.dashboard-body {
+  background-color: #D2C9E1;
+  height: 100vh;
+
+}
+.main {
+  position: relative;
+  justify-content: center; /* Centers horizontally */
+  align-items: center; /* Centers vertically */
+}
+.welcome-index {
+  text-align: center; /* Centers text within the div */
+  margin-top: 10vw;
+}
+.welcome-index img {
+  width: 50%;
+}
+.todo-cards {
+  z-index: 1px;
+
+}
+
+.center-image {
+  text-align: center;
+}
+.center-image img {
+  border: 4px solid black;
+}
+.display-task-add {
+  display: flex;
+  float: right;
+  margin-right: 1.8vw;
+  gap: 10px;
+  
+}
+.display-task-add h6 {
+  padding-top: 5px;
+}
+.display-task-add button {
+  border-radius: 100px;
+  background-color: #000100;
+  border: none;
+  color: white;
+  width: 30px;
+  height: 30px;
+}
+.members {
+  display: flex;
+  margin-top: 12px;
+  margin-right: 10px;
+}
+.members .mem {
+  background-color: #D2C9E1;
+  border-radius: 100px;
+  width: 30px;
+  height: 30px;
+  position: relative;
+  margin-left: -10px; 
+  z-index: 1; 
+  border: 1px solid black;
+}
+
+.members .mem:first-child {
+  margin-left: 0; 
+}
+.sidebar .custom {
+  font-size: 20px;
+  font-weight: 800;
+}
+.sidebar .custom .faServer {
+  font-size: 28px;
+}
+.sidebar .teams {
+  font-size: 20px;
+  font-weight: 800;
+  margin-top: 20px;
+}
+.center-extra {
+  text-align: center;
+}
+.center-extra button {
+  background-color: #157BFF;
+  color: white;
+  border-radius: 100px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 20px;
+  padding-right: 20px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  width: 140px;
+  border: none;
+}
+.sidebar h5 {
+  text-align: center;
 }
