@@ -1,7 +1,11 @@
+// ToDo.tsx
 import React, { useState, useEffect, ChangeEvent, MouseEvent } from 'react';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import TaskModal from './TaskModal';
+import '../App.css';
+
 interface Todo {
   _id: string;
   text: string;
@@ -10,7 +14,7 @@ interface Todo {
 
 const ToDo: React.FC = () => {
   const [todos, setTodos] = useState<Todo[]>([]);
-  const [newTodo, setNewTodo] = useState<string>('');
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     fetchTodos();
@@ -25,14 +29,10 @@ const ToDo: React.FC = () => {
     }
   };
 
-  const addTodo = async (event: MouseEvent<HTMLButtonElement>) => {
-    event.preventDefault();
-    if (newTodo.trim() === '') return;
-
+  const addTodo = async (text: string) => {
     try {
-      const response = await axios.post<Todo>('http://localhost:5000/todos', { text: newTodo });
+      const response = await axios.post<Todo>('http://localhost:5000/todos', { text });
       setTodos([...todos, response.data]);
-      setNewTodo('');
     } catch (error) {
       console.error('Error adding todo:', error);
     }
@@ -56,16 +56,12 @@ const ToDo: React.FC = () => {
     }
   };
 
-  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setNewTodo(event.target.value);
-  };
-
   return (
     <div>
-       <div className="display-task-add">
-       <h6>Add Task</h6>
-       <button onClick={addTodo}><FontAwesomeIcon icon={faPlus} /></button>
-       </div>
+      <div className="display-task-add">
+        <h6>Add Task</h6>
+        <button onClick={() => setShowModal(true)}><FontAwesomeIcon icon={faPlus} /></button>
+      </div>
       <ul>
         {todos.map(todo => (
           <li key={todo._id}>
@@ -79,6 +75,11 @@ const ToDo: React.FC = () => {
           </li>
         ))}
       </ul>
+      <TaskModal 
+        show={showModal} 
+        handleClose={() => setShowModal(false)} 
+        handleAdd={addTodo} 
+      />
     </div>
   );
 };
