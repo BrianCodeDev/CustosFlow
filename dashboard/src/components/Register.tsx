@@ -4,7 +4,8 @@ import googleicon from '../assets/img/google-icon.svg';
 import githubicon from '../assets/img/github-icon.svg';
 import '../App.css';
 import avatar from '../assets/img/avatar.svg';
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faImage } from '@fortawesome/free-solid-svg-icons';
 const Register: React.FC = () => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
@@ -80,9 +81,10 @@ const Register: React.FC = () => {
             <h2>Register to your account</h2>
             <h3>Already have an account? <Link to="/login">Log in</Link></h3>
             <form onSubmit={handleRegister} className='form-content'>
-            <div>
+            <div className='profile-upload'>
               <img src={avatar} alt="avatar" width={"60px"} height={"60px"}/>
-                <label>Profile Picture</label> <br />
+               
+                <FontAwesomeIcon className='faImage' icon={faImage} />
                 <input type="file" accept="image/*" onChange={handleFileChange} />
               </div>
               <div className="input-one">
@@ -102,8 +104,9 @@ const Register: React.FC = () => {
                 <input type="password" placeholder='Password' value={password} onChange={(e) => setPassword(e.target.value)} />
               </div>
 
-              <button type="submit">Register</button>
+              <button type="submit" className='register-button'>Register</button>
             </form>
+            <div className="notification">
             {registrationStatus === 'success' && (
               <div className="registration-success">
                 Registration successful! Redirecting to dashboard...
@@ -114,6 +117,7 @@ const Register: React.FC = () => {
                 Registration failed. Please try again later.
               </div>
             )}
+            </div>
             <div className="display-social-button">
               <div className="google-button">
                 <button><img src={googleicon} alt="google-icon" />Google</button>

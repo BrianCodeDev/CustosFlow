@@ -45,7 +45,7 @@ body {
 }
 .register-content-sidebar .logo {
     display: flex;
-    margin-top: 40px;
+    margin-top: 20px;
     padding-left: 60px;
 
 }
@@ -545,19 +545,12 @@ body {
 @media only screen and (max-width: 1200px) {
 
   .register-content-sidebar {
-    height: 100vh;
-    background-image: none;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    width: 100vw;
+   display: none;
      
 }
 .sidebar-one {
-  width: 100vw;
-  background-color: white;
-  margin: 0;
-  padding: 0;
+  display: none;
+  background-color: transparent;
 }
 .register-content-sidebar .logo {
   justify-content: center;
@@ -597,4 +590,40 @@ body {
   max-width: 400px; /* Optional: sets a max-width for the form */
   box-sizing: border-box; /* Includes padding and border in the element's total width and height */
 }
+}
+.profile-upload {
+  position: relative;
+  
+}
+.profile-upload img {
+ border: 3px solid black; 
+ border-radius: 100px; 
+}
+.profile-upload .faImage {
+position: absolute;
+  left: -10px;
+  color: #000000;
+  font-size: 25px;
+}
+.profile-upload input[type="file"] {
+  position: absolute;
+  left: 0;
+  top: -10px;
+  opacity: 0;
+  height: 100%;
+  width: 50px;
+  border-radius: 100px;
+  cursor: pointer;
+}
+.register-button {
+  width: 330px;
+  height: 50px;
+  background-color: white;
+  color: #157BFF;
+  font-size: 20px;
+  font-weight: 600;
+  border-radius: 6px;
+}
+.notification {
+  padding-left: 4.5vw;
 }

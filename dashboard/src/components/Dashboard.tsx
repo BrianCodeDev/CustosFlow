@@ -85,7 +85,6 @@ const Dashboard: React.FC<DashboardProps> = ({ userEmail }) => {
           <div className="mem mem-five"></div>
           <div className="mem mem-six"></div>
           <div className="mem mem-seven"></div>
-          <div className="mem mem-eight"></div>
               </div>
               <h6>{users.length} Members</h6>
               <button>Invite</button>
