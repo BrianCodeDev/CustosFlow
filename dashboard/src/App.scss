@@ -28,51 +28,78 @@ body {
     width: 30vw;
 }
 
+/* Ensure the sidebar has a flexible width */
 .sidebar-one {
-    width: 24.9vw;
-    background-color: white;
-    position: absolute;
-    top: 0;
-    height: 10vw;
+  display: flex;
+  flex-direction: column;
+  max-width: 100%;
+  box-sizing: border-box;
 }
-.register-content-sidebar p {
-    font-size: 20px;
-    width: 50%;
-    padding-left: 20px;
-    padding-top: 40px;
-    font-weight: 800;
-    color: black;
-}
-.register-content-sidebar .logo {
-    display: flex;
-    margin-top: 20px;
-    padding-left: 60px;
 
+
+
+/* Make the form and its elements responsive */
+.register-content-sidebar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
 }
-.register-content-sidebar h2 {
-    font-size: 20px;
-    padding-left: 60px;
-}
-.register-content-sidebar h3{
-    font-size: 16px;
-    padding-left: 60px;
-}
+
 .form-content {
-    padding-left: 60px;
+  width: 100%;
+  max-width: 400px; /* Adjust as needed */
+  display: flex;
+  flex-direction: column;
 }
-.form-content input {
-    width: 330px;
-    height: 40px;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    padding-left: 10px;
-    border-radius: 6px;
+
+.input-one, .input-two, .profile-upload, .register-button {
+  width: 100%;
+  margin-bottom: 15px;
 }
-.display-social-button {
-    display: block;
-    padding-left: 60px;
-  
+
+.profile-upload {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
 }
+
+
+
+.display-social-button button {
+  flex: 1;
+  margin: 5px;
+}
+
+.logo img {
+  width: 50px;
+  height: 50px;
+}
+
+.logo h1 {
+  font-size: 1.5rem;
+}
+
+/* Ensure all input fields are responsive */
+input[type="text"], input[type="password"], input[type="file"], button {
+  width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+/* Responsive design */
+@media (max-width: 600px) {
+  .register-content-sidebar {
+    padding: 10px;
+  }
+
+  .input-one, .input-two {
+    width: 100%;
+  }
+}
+
+
 .display-social-button button {
     margin-top: 10px;
     margin-bottom: 10px;
@@ -121,7 +148,9 @@ body {
     color: white;
     text-decoration: none;
   }
-  
+  .register-content-sidebar .logo {
+    display: flex;
+  }
   .sidebar a:hover {
     text-decoration: underline;
   }
@@ -593,30 +622,36 @@ body {
 }
 .profile-upload {
   position: relative;
-  
+  display: flex;
+  margin-top: 25px;
+  border-radius: 100px;
+  width: 50px;
+
 }
 .profile-upload img {
  border: 3px solid black; 
  border-radius: 100px; 
+ 
 }
 .profile-upload .faImage {
-position: absolute;
-  left: -10px;
-  color: #000000;
-  font-size: 25px;
+  position: absolute;
+  font-size: 30px;
+  color: #ececec;
 }
 .profile-upload input[type="file"] {
   position: absolute;
-  left: 0;
+  left: -7.5vw;
   top: -10px;
   opacity: 0;
   height: 100%;
   width: 50px;
   border-radius: 100px;
   cursor: pointer;
+  margin-left: 7vw;
+
+
 }
 .register-button {
-  width: 330px;
   height: 50px;
   background-color: white;
   color: #157BFF;

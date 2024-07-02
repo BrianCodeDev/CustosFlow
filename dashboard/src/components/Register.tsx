@@ -82,7 +82,7 @@ const Register: React.FC = () => {
             <h3>Already have an account? <Link to="/login">Log in</Link></h3>
             <form onSubmit={handleRegister} className='form-content'>
             <div className='profile-upload'>
-              <img src={avatar} alt="avatar" width={"60px"} height={"60px"}/>
+              <img src={avatar} alt="avatar" width={"70px"} height={"70px"}/>
                
                 <FontAwesomeIcon className='faImage' icon={faImage} />
                 <input type="file" accept="image/*" onChange={handleFileChange} />
