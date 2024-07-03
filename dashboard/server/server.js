@@ -1,8 +1,12 @@
+// server.js
+
 const express = require('express');
 const mongoose = require('mongoose');
 const multer = require('multer');
-const User = require('./models/User'); // Replace with your User model path
+const bcrypt = require('bcryptjs'); // Import bcrypt for password hashing
+const User = require('./routes/User'); // Replace with your User model path
 const cors = require('cors');
+const path = require('path');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -23,6 +27,13 @@ db.once('open', () => {
   console.log('Connected to MongoDB');
 });
 
+// Ensure the 'uploads' directory exists
+const fs = require('fs');
+const uploadDir = path.join(__dirname, 'uploads');
+if (!fs.existsSync(uploadDir)) {
+  fs.mkdirSync(uploadDir);
+}
+
 // Multer setup for file uploads
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -38,14 +49,17 @@ const upload = multer({ storage: storage });
 app.post('/api/register', upload.single('profilePicture'), async (req, res) => {
   try {
     const { firstName, lastName, email, password, subscribe } = req.body;
-    const profilePicture = req.file.path; // Assuming the path is saved to the database
+    const profilePicture = req.file ? req.file.path : null; // Handle cases where profilePicture may not be uploaded
+
+    // Hash the password before saving it to the database
+    const hashedPassword = await bcrypt.hash(password, 10);
 
     // Save user data to MongoDB
     const newUser = new User({
       firstName,
       lastName,
       email,
-      password,
+      password: hashedPassword,
       profilePicture,
     });
     await newUser.save();
@@ -62,10 +76,19 @@ app.post('/api/login', async (req, res) => {
   try {
     const { email, password } = req.body;
 
-    // Implement your login logic here (query MongoDB, validate credentials, etc.)
-    // Example: const user = await User.findOne({ email, password });
+    // Check if user exists
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
 
-    // For demo purposes, assume successful login
+    // Validate password
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+    if (!isPasswordValid) {
+      return res.status(401).json({ error: 'Invalid password' });
+    }
+
+    // Login successful
     res.status(200).json({ message: 'Login successful' });
   } catch (error) {
     console.error('Login failed', error);
@@ -73,7 +96,28 @@ app.post('/api/login', async (req, res) => {
   }
 });
 
-// Define other API routes as needed
+// API endpoint to get user data by email
+app.get('/api/users', async (req, res) => {
+  try {
+    const { email } = req.query;
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+    res.json({ firstName: user.firstName });
+  } catch (error) {
+    console.error('Error fetching user', error);
+    res.status(500).json({ error: 'Error fetching user' });
+  }
+});
+
+// Serve static files from the 'public' folder
+app.use(express.static(path.join(__dirname, 'public')));
+
+// Handle all other routes with a simple message or 404 Not Found
+app.get('*', (req, res) => {
+  res.status(404).send('Not Found');
+});
 
 // Start the server
 app.listen(PORT, () => {

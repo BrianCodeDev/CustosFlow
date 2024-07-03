@@ -1,5 +1,4 @@
-// ToDo.tsx
-import React, { useState, useEffect, ChangeEvent, MouseEvent } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
@@ -12,7 +11,11 @@ interface Todo {
   completed: boolean;
 }
 
-const ToDo: React.FC = () => {
+interface ToDoProps {
+  userEmail: string; // Ensure userEmail is provided
+}
+
+const ToDo: React.FC<ToDoProps> = ({ userEmail }) => {
   const [todos, setTodos] = useState<Todo[]>([]);
   const [showModal, setShowModal] = useState(false);
 
@@ -33,6 +36,7 @@ const ToDo: React.FC = () => {
     try {
       const response = await axios.post<Todo>('http://localhost:5000/todos', { text });
       setTodos([...todos, response.data]);
+      setShowModal(false); // Close modal after adding todo
     } catch (error) {
       console.error('Error adding todo:', error);
     }
@@ -75,7 +79,8 @@ const ToDo: React.FC = () => {
           </li>
         ))}
       </ul>
-      <TaskModal 
+      <TaskModal
+        userEmail={userEmail}
         show={showModal} 
         handleClose={() => setShowModal(false)} 
         handleAdd={addTodo} 

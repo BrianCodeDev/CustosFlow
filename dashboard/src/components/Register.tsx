@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import googleicon from '../assets/img/google-icon.svg';
@@ -30,7 +31,7 @@ const Register: React.FC = () => {
       }
 
       // Replace with actual API endpoint
-      const response = await fetch('/api/register', {
+      const response = await fetch('http://localhost:5000/api/register', {
         method: 'POST',
         body: formData,
       });

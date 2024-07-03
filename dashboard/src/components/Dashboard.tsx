@@ -16,27 +16,32 @@ interface DashboardProps {
   userEmail: string;
 }
 
+interface User {
+  firstName: string;
+  profileImage: string;
+}
+
 const Dashboard: React.FC<DashboardProps> = ({ userEmail }) => {
-  const [users, setUsers] = useState<any[]>([]); // State to hold users
+  const [user, setUser] = useState<User | null>(null); // State to hold the user data
 
   useEffect(() => {
-    // Fetch user data from backend (replace with actual API call)
-    const fetchUsers = async () => {
+    // Fetch user data from backend
+    const fetchUser = async () => {
       try {
-        const response = await fetch('/api/users'); // Example endpoint to fetch users
+        const response = await fetch(`http://localhost:5000/api/users`);
         if (response.ok) {
           const data = await response.json();
-          setUsers(data.users); // Assuming API returns an array of users
+          setUser(data); // Assuming API returns the user object with firstName
         } else {
-          console.error('Failed to fetch users');
+          console.error('Failed to fetch user');
         }
       } catch (error) {
-        console.error('Error fetching users:', error);
+        console.error('Error fetching user:', error);
       }
     };
 
-    fetchUsers();
-  }, []);
+    fetchUser();
+  }, [userEmail]);
 
   return (
     <div className='dashboard-body'>
@@ -46,7 +51,15 @@ const Dashboard: React.FC<DashboardProps> = ({ userEmail }) => {
             <img src={logo} alt="logo-sidebar" />
           </div>
           <ul>
-            <li className='overview'><a href="#"><img src={leaf} alt="" />Overview <a href="#" className='hvr-icon-spin'><FontAwesomeIcon className='hvr-icon faShare' icon={faShare} /></a></a></li>
+            <li className='overview'>
+              <a href="#">
+                <img src={leaf} alt="" />
+                Overview
+                <a href="#" className='hvr-icon-spin'>
+                  <FontAwesomeIcon className='hvr-icon faShare' icon={faShare} />
+                </a>
+              </a>
+            </li>
             <li className='custom'><a href="#"><FontAwesomeIcon className='faServer' icon={faServer} /> Custom</a></li>
             <li><a href="#">Deployments</a></li>
             <li><a href="#">Integrations</a></li>
@@ -61,7 +74,10 @@ const Dashboard: React.FC<DashboardProps> = ({ userEmail }) => {
             <div className="center-extra">
               <button>Github</button> <br />
               <button>Upgrade</button>
+              <h6 style={{textAlign: "center", marginTop: "20px"}}>Welcome, {user ? user.firstName : 'Loading...'}!</h6>
             </div>
+            
+
           </ul>
         </div>
         <div className="main-content">
@@ -78,15 +94,17 @@ const Dashboard: React.FC<DashboardProps> = ({ userEmail }) => {
             </div>
             <ul className="navbar-links">
               <div className="members">
-              <div className="mem mem-one"></div>
-          <div className="mem mem-two"></div>
-          <div className="mem mem-three"></div>
-          <div className="mem mem-four"></div>
-          <div className="mem mem-five"></div>
-          <div className="mem mem-six"></div>
-          <div className="mem mem-seven"></div>
+                {[1, 2, 3, 4, 5, 6].map((mem, index) => (
+                  <div key={index} className={`mem mem-${mem}`}></div>
+                ))}
+                <div className="mem mem-seven">
+                  {user ? (
+                    <img src={user.profileImage} alt="Profile" className="profile-image" />
+                  ) : (
+                    <span>Loading...</span>
+                  )}
+                </div>
               </div>
-              <h6>{users.length} Members</h6>
               <button>Invite</button>
             </ul>
           </nav>
@@ -94,12 +112,13 @@ const Dashboard: React.FC<DashboardProps> = ({ userEmail }) => {
             <img src={banner} alt="ad-banner" width={"96%"} />
           </div>
           <div className="todo-cards">
-            <ToDo />
+            <ToDo userEmail={''} />
           </div>
           <div className="main">
             <div className="welcome-index">
               <img src={welcomedashboard} alt="welcome-index" />
             </div>
+   
           </div>
         </div>
       </div>

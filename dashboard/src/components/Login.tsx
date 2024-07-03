@@ -14,7 +14,7 @@ const Login: React.FC = () => {
     e.preventDefault(); // Prevent form submission default behavior
 
     try {
-      const response = await axios.post('/api/login', {
+      const response = await axios.post('http://localhost:5000/api/login', {
         email,
         password,
       });
